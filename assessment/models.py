@@ -29,11 +29,16 @@ class Response(models.Model):
 
 
 class Question(models.Model):
+    """
+    choices field is a JSON object formatted as {choiceID: choiceText}
+    """
     text = models.CharField(max_length=200)
-    topic = models.CharField(max_length=100, blank=True, null=True)
+    subtext = models.CharField(max_length=400, blank=True, null=True)
+    pillar = models.CharField(max_length=100, blank=True, null=True)
+    choices = models.JSONField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.topic}-{self.text[0:20]}..."
+        return f"[{self.pillar}] {self.text[0:30]}..."
 
 
 class Assessment(models.Model):
